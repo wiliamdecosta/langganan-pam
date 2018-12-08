@@ -31,11 +31,11 @@
                             <thead>
                                 <tr>
                                     <th>Check</th>
-                                    <th></th>
+                                    <th>No Laporan</th>
                                     <th>Lokasi</th>
-                                    <th>Mengenai</th>
+                                    <th>Keluhan</th>
                                     <th class="text-center">Status</th>
-                                    <th class="text-right">Date/Time</th>
+                                    <th class="text-right">Tanggal Lapor</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,11 +46,11 @@
                                             <label class="custom-control-label" for="checkbox0"></label>
                                         </div>
                                     </td>
-                                    <td style="width:40px" class="hidden-xs-down"><i class="fa fa-star-o"></i></td>
-                                    <td class="hidden-xs-down">Tegalega</td>
-                                    <td class="max-texts"> <a href="app-email-detail.html"> Ada pipa yang patah.. </a></td>
-                                    <td class="text-center"> Terkirim </td>
-                                    <td class="text-right"> 12:30 PM </td>
+                                    <td><a href="<?php echo site_url('aduan_pelanggan/edit');?>"> 11000290</a></td>
+                                    <td class="hidden-xs-down">Bandung Kota</td>
+                                    <td class="max-texts">  Ada pipa yang patah..</td>
+                                    <td class="text-center"> <span class="label label-warning">Menunggu</span> </td>
+                                    <td class="text-right"> 20 October 2018 21:17:14 </td>
                                 </tr>
                                 <tr class="unread">
                                     <td>
@@ -59,11 +59,11 @@
                                             <label class="custom-control-label" for="checkbox1"></label>
                                         </div>
                                     </td>
-                                    <td class="hidden-xs-down"><i class="fa fa-star-o"></i></td>
-                                    <td class="hidden-xs-down">Cijerah</td>
-                                    <td class="max-texts"><a href="app-email-detail.html">Pipa Bocor</a></td>
-                                    <td class="text-center"> Diproses </td>
-                                    <td class="text-right"> May 13 </td>
+                                    <td><a href="javascript:void(0)"> 11000291</a></td>
+                                    <td class="hidden-xs-down">Bandung Timur</td>
+                                    <td class="max-texts">Pipa Bocor</td>
+                                    <td class="text-center"> <span class="label label-success">Selesai</span> </td>
+                                    <td class="text-right"> 22 October 2018 21:17:14 </td>
                                 </tr>
                                 <tr class="unread">
                                     <td>
@@ -72,11 +72,11 @@
                                             <label class="custom-control-label" for="checkbox2"></label>
                                         </div>
                                     </td>
-                                    <td class="hidden-xs-down"><i class="fa fa-star-o"></i></td>
-                                    <td class="hidden-xs-down">Cijerah</td>
-                                    <td class="max-texts"><a href="app-email-detail.html"> Air tampak kotor di rumah saya </a></td>
-                                    <td class="text-center"> Selesai </td>
-                                    <td class="text-right"> May 12 </td>
+                                    <td><a href="javascript:void(0)"> 11000292</a></td>
+                                    <td class="hidden-xs-down">Bandung Barat</td>
+                                    <td class="max-texts"> Air tampak kotor di rumah saya </td>
+                                    <td class="text-center"> <span class="label label-info">Sedang Proses</span> </td>
+                                    <td class="text-right"> 29 October 2018 21:17:14 </td>
                                 </tr>
                             </tbody>
                         </table>

@@ -91,6 +91,7 @@
                                             <p class="form-control-static"> Rp. 350,000 </p>
                                         </div>
                                     </div>
+									<button class="btn btn-success"><span class="btn-label"><i class="far fa-envelope"></i></span> Kirim Email</button>
                                 </div>
                             </div>
 

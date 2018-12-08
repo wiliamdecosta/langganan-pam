@@ -9,7 +9,7 @@ class Panel extends CI_Controller
     }
 
     function index() {
-        check_login();
+      //  check_login();
         if(!$this->modules->allowAccessPanel($this->session->userdata('user_id'),$this->input->get('module_id'))) {
             redirect(base_url('home'));
             return;

@@ -75,10 +75,10 @@ $query_builder = TRUE;
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'pdam';
-$db['default']['password'] = 'pdam123';
-$db['default']['database'] = 'db_pengaduan';
-$db['default']['dbdriver'] = 'postgre';
+$db['default']['username'] = 'root';
+$db['default']['password'] = '';
+$db['default']['database'] = '';
+$db['default']['dbdriver'] = 'mysqli';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = FALSE;
 $db['default']['db_debug'] = TRUE;

@@ -8,14 +8,14 @@ class Home extends CI_Controller
     }
 
     function index() {
-        check_login();
+      //  check_login();
         $this->load->view('home/index');
     }
 
     function load_content($id) {
         try {
             $file_exist = true;
-            check_login();
+           // check_login();
             $id = str_replace('.php','',$id);
             $file = explode(".", $id);
             $url_file = "";

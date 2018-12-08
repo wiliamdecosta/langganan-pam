@@ -21,6 +21,7 @@ class Auth extends CI_Controller
     }
 
     public function login() {
+		redirect(base_url().'home');
         $username = $this->security->xss_clean($this->input->post('username'));
         $password = $this->security->xss_clean($this->input->post('password'));
 		

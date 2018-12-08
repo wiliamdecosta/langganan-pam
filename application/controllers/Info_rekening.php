@@ -8,12 +8,12 @@ class Info_rekening extends CI_Controller
     }
 
     function index() {
-        check_login();
+       // check_login();
         $this->load->view('info_rekening/cek_tagihan');
     }
 
     function cek_tagihan() {
-        check_login();
+       // check_login();
         $this->load->view('info_rekening/cek_tagihan');
     }
 

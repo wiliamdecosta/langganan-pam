@@ -21,7 +21,7 @@
                     <h4 class="m-b-0 text-white">Form Aduan</h4>
                 </div>
                 <div class="card-body">
-                    <form action="">
+                    <form action="<?php echo site_url('aduan_pelanggan');?>">
                         <div class="form-body">
                             <h3 class="card-title">Tuliskan Aduan Anda di Sini :</h3>
                             <hr>
@@ -29,19 +29,44 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label"><strong>Lokasi :</strong> </label>
-                                        <input id="lokasi" class="form-control" required="" placeholder="Tuliskan lokasi aduan.." type="text">
+										<select class="form-control">
+											<option> Bandung Kota </option>
+											<option> Bandung Barat </option>
+											<option> Bandung Timur </option>
+											<option> Bandung Selatan </option>
+											<option> Bandung Utara </option>
+										</select>
+                                        
                                     </div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<label class="control-label"><strong>Alamat Lengkap</strong> </label>
+												<input id="lokasi" class="form-control" required="" placeholder="" type="text">
+											</div>
+										</div>
+									</div>
                                     <div class="form-group">
-                                        <label class="control-label"><strong>Mengenai : </strong></label>
+                                        <label class="control-label"><strong>Keluhan : </strong></label>
                                         <input id="lokasi" class="form-control" required="" placeholder="Tuliskan subyek aduan.." type="text">
                                     </div>
                                 </div>
                             </div>
+							 
+							
                             <div class="row">
                                 <div class="col-md-10">
                                     <div class="form-group">
                                         <label class="control-label"><strong>Deksripsi : </strong></label>
                                         <textarea id="lokasi" class="form-control" required="" placeholder="Deskripsikan aduan Anda di sini.."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+							<div class="row">
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <label class="control-label"><strong>Upload Foto : </strong></label>
+                                        <input class="form-control" type="file">
                                     </div>
                                 </div>
                             </div>

@@ -36,7 +36,7 @@ class Ws extends CI_Controller {
 	function json($class_name, $func_name) {
 
 		try {
-			check_login();
+			//check_login();
 
 			$class_location = explode(".",$class_name);
 			if(count($class_location) > 1) {
@@ -67,7 +67,7 @@ class Ws extends CI_Controller {
 	function json_jqgrid($class_name, $func_name) {
 
 		try {
-			check_login();
+			//check_login();
 
 			$class_location = explode(".",$class_name);
 			if(count($class_location) > 1) {
