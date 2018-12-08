@@ -26,25 +26,33 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label class="control-label"><strong>ID Pelanggan :</strong> </label>
+                                        <input type="text" class="form-control" disabled="" value="<?php echo $this->session->userdata('no_pelanggan'); ?>">
+                                    </div>
+                                    <div class="form-group">
                                         <label class="control-label"><strong>Periode :</strong> </label>
-                                        <select name="periode" class="form-control">
-                                            <option value="">November 2018</option>
-                                            <option value="">Oktober 2018</option>
-                                            <option value="">September 2018</option>
-                                            <option value="">Agustus 2018</option>
-                                            <option value="">Juli 2018</option>
+                                        <select id="periode" name="periode" class="form-control">
+                                            <?php for ($i = 1; $i < 4; $i++): ?>
+                                                <option value="<?php echo date('m-Y', strtotime("-$i month")); ?>"><?php echo date('F Y', strtotime("-$i month")); ?></option>
+                                            <?php endfor; ?>
                                         </select>
 
                                     </div>
                                     <div class="form-group">
                                          <button class="btn btn-success" type="button" id="btn-cek">
-                                            <i class="fa fa-mail"></i>
                                             Cek Tagihan
                                         </button>
                                     </div>
                                 </div>
                             </div>
 
+                            <div class="row" id="info-empty" style="display:none;">
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <h4 id="info-empty-html"></h4>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row" id="info-tagihan" style="display:none;">
                                 <div class="col-md-12">
                                     <hr>
@@ -54,41 +62,41 @@
                                     <div class="form-group row">
                                         <label class="control-label text-right col-md-3">ID Pelanggan :</label>
                                         <div class="col-md-9">
-                                            <p class="form-control-static"> 57312718282 </p>
+                                            <p class="form-control-static" id="info-nopel"> 57312718282 </p>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="control-label text-right col-md-3">Nama :</label>
                                         <div class="col-md-9">
-                                            <p class="form-control-static"> Wiliam Decosta </p>
+                                            <p class="form-control-static" id="info-nama"> Wiliam Decosta </p>
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <label class="control-label text-right col-md-3">Bulan / Tahun :</label>
                                         <div class="col-md-9">
-                                            <p class="form-control-static"> November 2018 </p>
+                                            <p class="form-control-static" id="info-periode"> November 2018 </p>
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <label class="control-label text-right col-md-3">Stand Meter :</label>
                                         <div class="col-md-9">
-                                            <p class="form-control-static"> 0000000090 - 000000187 </p>
+                                            <p class="form-control-static" id="info-standmeter"> 0000000090 - 000000187 </p>
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-3">Denda :</label>
+                                        <label class="control-label text-right col-md-3">Pemakaian :</label>
                                         <div class="col-md-9">
-                                            <p class="form-control-static"> Rp.0</p>
+                                            <p class="form-control-static" id="info-pemakaian"> 1 </p>
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-3">Total :</label>
+                                        <label class="control-label text-right col-md-3"><b>Total Tagihan :</b></label>
                                         <div class="col-md-9">
-                                            <p class="form-control-static"> Rp. 350,000 </p>
+                                            <p class="form-control-static" id="info-total-tagihan"> Rp. 350,000 </p>
                                         </div>
                                     </div>
 									<button class="btn btn-success"><span class="btn-label"><i class="far fa-envelope"></i></span> Kirim Email</button>
@@ -106,7 +114,40 @@
 <script>
     $(function() {
         $('#btn-cek').on('click', function(e) {
-            $('#info-tagihan').show();
+
+            $.ajax({
+                url: '<?php echo WS_JQGRID."tagihan.tagihan_controller/cek_info_tagihan"; ?>',
+                dataType: "json",
+                type: "POST",
+                data: {
+                    periode : $('#periode').val()
+                },
+                success: function (data) {
+
+                    if(data.rows == null) {
+                        //$('#info-tagihan').html('<h4>Maaf, data info tagihan Anda belum tersedia untuk periode '+ $('#periode option:selected').text() +'</h4>');
+                        $('#info-empty-html').html('<i>Maaf, data info tagihan Anda belum tersedia untuk periode '+ $('#periode option:selected').text() + '</i>');
+                        $('#info-empty').show();
+                        $('#info-tagihan').hide();
+
+                    }else {
+                        var info_tagihan = data.rows;
+
+                        $('#info-nopel').html(info_tagihan.nolang);
+                        $('#info-nama').html(info_tagihan.nama);
+                        $('#info-periode').html($('#periode option:selected').text());
+                        $('#info-standmeter').html(info_tagihan.stand_awal + ' - ' + info_tagihan.stan_akhir);
+                        $('#info-pemakaian').html(info_tagihan.pemakaian);
+                        $('#info-total-tagihan').html('<strong>Rp. '+ $.number(info_tagihan.tagihan, 0)+'</strong>');
+
+                        $('#info-tagihan').show();
+                        $('#info-empty').hide();
+                    }
+                },
+                error: function (xhr, status, error) {
+                    swal({title: "Error!", text: xhr.responseText, html: true, type: "error"});
+                }
+            });
         });
     });
 

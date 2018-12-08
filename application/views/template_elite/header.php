@@ -36,6 +36,8 @@
     <script src="<?php echo base_url();?>assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
     <!--Custom JavaScript -->
     <script src="<?php echo base_url();?>assets/js/custom.min.js"></script>
+    <?php $this->load->view('template_elite/styles.php'); ?>
+    <?php $this->load->view('template_elite/scripts.php'); ?>
 </head>
 
 <body class="skin-blue fixed-layout">
@@ -91,7 +93,7 @@
                         <!-- User Profile -->
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown u-pro">
-                            <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<?php echo base_url();?>assets/images/users/1.jpg" alt="user" class=""> <span class="hidden-md-down">Welcome, PDAM Tirtawening<?php echo $this->session->userdata('pelanggan_nama'); ?> &nbsp;<i class="fa fa-angle-down"></i></span> </a>
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<?php echo base_url();?>assets/images/users/1.jpg" alt="user" class=""> <span class="hidden-md-down">Welcome, <?php echo $this->session->userdata('user_name'); ?> &nbsp;<i class="fa fa-angle-down"></i></span> </a>
                             <div class="dropdown-menu dropdown-menu-right animated flipInY">
                                 <!-- text-->
                                 <a href="javascript:void(0)" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
@@ -121,6 +123,9 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li> <a class="" href="<?php echo base_url();?>"><i class="icon-home"></i><span class="hide-menu">Home</span></a></li>
+
+
+                        <?php if($this->session->userdata('group_login') == 'pelanggan'): ?>
                         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class=" icon-book-open"></i><span class="hide-menu"> Aduan Pelanggan </span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="<?php echo base_url('aduan_pelanggan/add');?>">Tulis Aduan</a></li>
@@ -132,7 +137,20 @@
                                 <li><a href="<?php echo base_url('info_rekening/cek_tagihan');?>">Cek Info Tagihan</a></li>
                             </ul>
                         </li>
-
+                        <?php else: /* Menu Admin Below*/?>
+                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-laptop"></i><span class="hide-menu"> Data Master </span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="<?php echo base_url('data_master/lokasi');?>">Lokasi</a></li>
+                                <li><a href="<?php echo base_url('data_master/user_pelanggan');?>">Pelanggan</a></li>
+                                <li><a href="<?php echo base_url('data_master/user_admin');?>">Admin</a></li>
+                            </ul>
+                        </li>
+                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class=" icon-book-open"></i><span class="hide-menu"> Aduan Pelanggan </span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="<?php echo base_url('aduan_pelanggan/admin');?>">List Aduan</a></li>
+                            </ul>
+                        </li>
+                        <?php endif; ?>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->

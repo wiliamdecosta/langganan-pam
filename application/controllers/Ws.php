@@ -68,7 +68,6 @@ class Ws extends CI_Controller {
 
 		try {
 			//check_login();
-
 			$class_location = explode(".",$class_name);
 			if(count($class_location) > 1) {
 			    $this->load->library($class_location[0]."/".$class_location[1]);

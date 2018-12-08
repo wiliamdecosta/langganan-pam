@@ -44,15 +44,23 @@
             <div class="card-body">
                 <form class="form-horizontal form-material text-center" method="post" id="loginform" action="<?php echo base_url('auth/login');?>">
                     <a href="javascript:void(0)" class="db"><img src="<?php echo base_url();?>/images/logo_pdam.png" width="100" alt="Home" /></a>
-					<br/><h2 class="text-center">Informasi & Aduan Pelanggan</h2>
+					<br/><h2 class="text-center">Informasi Tagihan & Aduan Pelanggan</h2>
                     <div class="form-group m-t-40">
                         <div class="col-xs-12">
-                            <input class="form-control" type="text" required="" name="username" placeholder="Username">
+                            <input class="form-control" type="text" required="" name="email" placeholder="Email">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-xs-12">
                             <input class="form-control" type="password" required="" name="password" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <select name="group_login" class="form-control">
+                                <option value="pelanggan">Pelanggan</option>
+                                <option value="admin">Admin</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group text-center m-t-20">

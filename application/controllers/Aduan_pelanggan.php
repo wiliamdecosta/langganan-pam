@@ -8,17 +8,17 @@ class Aduan_pelanggan extends CI_Controller
     }
 
     function index() {
-        //check_login();
+        check_login();
         $this->load->view('aduan_pelanggan/index');
     }
 
     function add() {
-        //check_login();
+        check_login();
         $this->load->view('aduan_pelanggan/add');
     }
-	
+
 	 function edit() {
-        //check_login();
+        check_login();
         $this->load->view('aduan_pelanggan/edit');
     }
 
