@@ -96,7 +96,7 @@
                             <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<?php echo base_url();?>assets/images/users/1.jpg" alt="user" class=""> <span class="hidden-md-down">Welcome, <?php echo $this->session->userdata('user_name'); ?> &nbsp;<i class="fa fa-angle-down"></i></span> </a>
                             <div class="dropdown-menu dropdown-menu-right animated flipInY">
                                 <!-- text-->
-                                <a href="javascript:void(0)" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
+                                <a href="<?php echo base_url('auth/profile'); ?>" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
                                 <!-- text-->
                                 <a href="<?php echo base_url('auth/logout'); ?>" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
                                 <!-- text-->

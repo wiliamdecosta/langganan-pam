@@ -305,6 +305,81 @@ class User_admin_controller {
         }
     }
 
+
+    function updateProfile() {
+
+        $data = array('rows' => array(), 'page' => 1, 'records' => 0, 'total' => 1, 'success' => false, 'message' => '');
+
+        $nama = getVarClean('nama','str','');
+        $email = getVarClean('email','str','');
+        $password = getVarClean('password','str','');
+        $password_confirmation = getVarClean('password_confirmation','str','');
+
+        try {
+            $ci = & get_instance();
+            $userdata = $ci->session->userdata;
+
+            if($userdata['group_login'] == 'admin') {
+                $ci->load->model('data_master/user_admin');
+                $table = $ci->user_admin;
+
+                $record = array(
+                    'admin_id' => $userdata['user_id'],
+                    'admin_password' => ''
+                );
+
+                if(!empty($password)) {
+                    if(strlen($password) < 6) throw new Exception('Min.Password 6 Karakter');
+                    if($password != $password_confirmation) throw new Exception('Password tidak cocok');
+
+                    $record['admin_password'] = md5($password);
+
+                    $sql = "UPDATE user_admin
+                                SET admin_password = ?
+                                WHERE admin_id = ?";
+                    $query = $ci->db->query($sql, array($record['admin_password'],
+                                                                        $record['admin_id']));
+                }
+
+            }elseif($userdata['group_login'] == 'pelanggan') {
+                $ci->load->model('data_master/user_pelanggan');
+                $table = $ci->user_pelanggan;
+
+                $record = array(
+                    'user_id' => $userdata['user_id'],
+                    'password' => '',
+                    'password_visible' => ''
+                );
+
+                if(!empty($password)) {
+                    if(strlen($password) < 6) throw new Exception('Min.Password 6 Karakter');
+                    if($password != $password_confirmation) throw new Exception('Password tidak cocok');
+
+                    $record['password'] = md5($password);
+                    $record['password_visible'] = $password;
+
+                    $sql = "UPDATE user_pelanggan
+                                SET password = ?,
+                                password_visible = ?
+                                WHERE user_id = ?";
+                    $query = $ci->db->query($sql, array($record['password'],
+                                                                    $record['password_visible'],
+                                                                        $record['user_id']));
+                }
+            }
+
+
+            $data['success'] = true;
+            $data['message'] = 'Data profile berhasil diupdate';
+
+        }catch (Exception $e) {
+            $table->db->trans_rollback(); //Rollback Trans
+            $data['message'] = $e->getMessage();
+        }
+
+        return $data;
+    }
+
 }
 
 /* End of file User_admin_controller.php */

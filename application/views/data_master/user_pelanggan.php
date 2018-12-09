@@ -207,6 +207,7 @@ jQuery(function($) {
                     form.css({"width": 0.60*screen.width+"px"});*/
                     $("#password").removeClass( "jqgrid-required" );
                     $("#password").val('');
+                    $('#no_pelanggan').prop("readonly",true);
 
                 },
                 afterShowForm: function(form) {
@@ -237,7 +238,7 @@ jQuery(function($) {
                     style_edit_form(form);
                     /*form.css({"height": 0.50*screen.height+"px"});
                     form.css({"width": 0.60*screen.width+"px"});*/
-
+                    $('#no_pelanggan').prop("readonly",true);
                     $("#password").addClass( "jqgrid-required" );
                 },
                 afterShowForm: function(form) {

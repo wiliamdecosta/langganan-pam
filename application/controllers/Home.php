@@ -8,7 +8,7 @@ class Home extends CI_Controller
     }
 
     function index() {
-      //  check_login();
+        check_login();
         $this->load->view('home/index');
     }
 

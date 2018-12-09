@@ -103,4 +103,9 @@ class Auth extends CI_Controller
         redirect(base_url().'auth/index');
     }
 
+    public function profile() {
+        check_login();
+        $this->load->view('auth/profile');
+    }
+
 }
