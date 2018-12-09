@@ -128,7 +128,7 @@
                         <?php if($this->session->userdata('group_login') == 'pelanggan'): ?>
                         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class=" icon-book-open"></i><span class="hide-menu"> Aduan Pelanggan </span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="<?php echo base_url('aduan_pelanggan/add');?>">Tulis Aduan</a></li>
+                                <li><a href="<?php echo base_url('aduan_pelanggan/tulis_aduan');?>">Tulis Aduan</a></li>
                                 <li><a href="<?php echo base_url('aduan_pelanggan');?>">List Aduan</a></li>
                             </ul>
                         </li>

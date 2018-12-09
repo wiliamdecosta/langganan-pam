@@ -25,7 +25,7 @@
             </div>
 
             <div class="card-body p-t-0">
-                <div class="card b-all shadow-none">
+                <div class="card b-all ">
                     <div class="inbox-center table-responsive">
                         <table class="table table-hover no-wrap">
                             <thead>
