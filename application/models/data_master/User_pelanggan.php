@@ -46,14 +46,14 @@ class User_pelanggan extends Abstract_model {
             //$this->record['created_date'] = date('Y-m-d');
             //$this->record['updated_date'] = date('Y-m-d');
 
-            $this->db->set($this->pkey,"NULL",false);
-
             if (isset($this->record['password'])){
                 if (trim($this->record['password']) == '') throw new Exception('Password Field is Empty');
                 if (strlen($this->record['password']) < 6) throw new Exception('Mininum password length is 6 characters');
                 $this->record['password'] = md5($this->record['password']);
                 $this->record['password_visible'] = $this->record['password'];
             }
+
+            $this->record[$this->pkey] = $this->generate_seq_id($this->table, $this->pkey);
 
         }else {
             //do something

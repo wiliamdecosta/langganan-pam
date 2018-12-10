@@ -45,13 +45,14 @@ class User_admin extends Abstract_model {
             //$this->record['created_date'] = date('Y-m-d');
             //$this->record['updated_date'] = date('Y-m-d');
 
-            $this->db->set($this->pkey,"NULL",false);
 
             if (isset($this->record['admin_password'])){
                 if (trim($this->record['admin_password']) == '') throw new Exception('Password Field is Empty');
                 if (strlen($this->record['admin_password']) < 6) throw new Exception('Mininum password length is 6 characters');
                 $this->record['admin_password'] = md5($this->record['admin_password']);
             }
+
+            $this->record[$this->pkey] = $this->generate_seq_id($this->table, $this->pkey);
 
         }else {
             //do something

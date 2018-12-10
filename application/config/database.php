@@ -75,11 +75,11 @@ $query_builder = TRUE;
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = '';
-$db['default']['database'] = 'db_billing_pdam';
-$db['default']['port'] = 3306;
-$db['default']['dbdriver'] = 'mysqli';
+$db['default']['username'] = 'pdam';
+$db['default']['password'] = 'pdam123';
+$db['default']['database'] = 'db_pdam';
+$db['default']['port'] = 5432;
+$db['default']['dbdriver'] = 'postgre';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = FALSE;
 $db['default']['db_debug'] = TRUE;

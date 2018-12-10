@@ -33,7 +33,7 @@ class Lokasi extends Abstract_model {
         if($this->actionType == 'CREATE') {
             //do something
             // example :
-            $this->db->set($this->pkey,"NULL",false);
+            $this->record[$this->pkey] = $this->generate_seq_id($this->table, $this->pkey);
 
 
         }else {

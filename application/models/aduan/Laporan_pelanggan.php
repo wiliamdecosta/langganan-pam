@@ -57,19 +57,20 @@ class Laporan_pelanggan extends Abstract_model {
 
             //do something
             // example :
-            $this->db->set('laporan_tgl',"now()",false);
+            $this->db->set('laporan_tgl',"current_timestamp",false);
 
-            $this->db->set('creation_date',"now()",false);
+            $this->db->set('creation_date',"current_timestamp",false);
             $this->record['created_by'] = $userdata['user_name'];
-            $this->db->set('updated_date',"now()",false);
+            $this->db->set('updated_date',"current_timestamp",false);
             $this->record['updated_by'] = $userdata['user_name'];
 
+            $this->record[$this->pkey] = $this->generate_seq_id($this->table, $this->pkey);
 
         }else {
             //do something
             //example:
 
-            $this->db->set('updated_date',"now()",false);
+            $this->db->set('updated_date',"current_timestamp",false);
             $this->record['updated_by'] = $userdata['user_name'];
 
         }
