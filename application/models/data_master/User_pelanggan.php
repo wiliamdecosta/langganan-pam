@@ -72,6 +72,21 @@ class User_pelanggan extends Abstract_model {
         return true;
     }
 
+
+    function isEmailExist($email) {
+        $sql = "SELECT COUNT(1) as total FROM user_pelanggan
+                    WHERE email = ?";
+
+        $query = $this->db->query($sql, $email);
+        $result = $query->row_array();
+
+        if(isset($result['total'])) {
+            if($result['total'] > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
 /* End of file Users.php */

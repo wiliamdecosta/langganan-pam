@@ -55,14 +55,7 @@
                             <input class="form-control" type="password" required="" name="password" placeholder="Password">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-xs-12">
-                            <select name="group_login" class="form-control">
-                                <option value="pelanggan">Pelanggan</option>
-                                <option value="admin">Admin</option>
-                            </select>
-                        </div>
-                    </div>
+
                     <div class="form-group text-center m-t-20">
                         <div class="col-xs-12">
                             <button class="btn btn-info btn-lg btn-block text-uppercase btn-rounded" type="submit">Log In</button>

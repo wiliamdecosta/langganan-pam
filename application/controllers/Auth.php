@@ -26,15 +26,28 @@ class Auth extends CI_Controller
         $password = $this->security->xss_clean($this->input->post('password'));
 
 
-        $group_login = $this->security->xss_clean($this->input->post('group_login'));
+        /*$group_login = $this->security->xss_clean($this->input->post('group_login'));
         if($group_login != 'admin' and $group_login != 'pelanggan') {
             redirect(base_url().'auth/index');
-        }
+        }*/
 
 
         if(empty($email) or empty($password)) {
             $this->session->set_flashdata('error_message','Email atau password harus diisi');
             redirect(base_url().'auth/index');
+        }
+
+        $group_login = '';
+        $this->load->model('data_master/user_admin');
+        $tAdmin = $this->user_admin;
+
+        $this->load->model('data_master/user_pelanggan');
+        $tPelanggan = $this->user_pelanggan;
+
+        if($tAdmin->isEmailExist($email)) {
+            $group_login = 'admin';
+        }else if($tPelanggan->isEmailExist($email)) {
+            $group_login = 'pelanggan';
         }
 
         if($group_login == 'pelanggan') {
