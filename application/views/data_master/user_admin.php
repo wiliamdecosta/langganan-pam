@@ -64,7 +64,7 @@ jQuery(function($) {
                     edittype: 'password',
                     editoptions: {
                         size: 30,
-                        maxlength:15,
+                        maxlength:20,
                         defaultValue: ''
                     },
                     editrules: {edithidden: true, required: false},

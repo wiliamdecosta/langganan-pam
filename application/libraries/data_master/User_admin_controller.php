@@ -145,6 +145,7 @@ class User_admin_controller {
         }else {
 
             try{
+
                 $table->db->trans_begin(); //Begin Trans
 
                     $table->setRecord($items);
