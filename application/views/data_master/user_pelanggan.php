@@ -89,7 +89,7 @@ jQuery(function($) {
                     },
                     editrules: {required: true}
                 },
-                {label: 'Email',name: 'admin_email',width: 150, hidden:false, align: "left",editable: true,
+                {label: 'Email',name: 'email',width: 250, hidden:false, align: "left",editable: true,
                     edittype: 'text',
                     editoptions: {
                         size: 30,
