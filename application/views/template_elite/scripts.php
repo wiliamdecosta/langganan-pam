@@ -6,7 +6,7 @@
 <script src="<?php echo base_url(); ?>assets/node_modules/sweetalert/sweetalert.min.js"></script>
 <!-- end swal -->
 
-
+<script src="<?php echo base_url(); ?>assets/js/jquery.simplePagination.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery.number.min.js" type="text/javascript"></script>
 
 <script>

@@ -25,6 +25,39 @@ function html_spaces($number=1) {
     return $result;
 }
 
+function getCurrentLocation() {
+    $ci =& get_instance();
+    $userdata = $ci->session->userdata;
+
+    $sql = "SELECT lokasi_nama FROM lokasi
+                where lokasi_id = ?";
+    $query = $ci->db->query($sql, $userdata['lokasi_id']);
+    $row = $query->row_array();
+
+    return $row['lokasi_nama'];
+}
+
+function getStatusList() {
+    return array(
+        'Menunggu' => 'Menunggu',
+        'Sedang Diproses' => 'Sedang Diproses',
+        'Selesai' => 'Selesai',
+        'Tidak Valid' => 'Tidak Valid'
+    );
+}
+
+function getClassStatus($status) {
+    $arrStatus = array(
+        'Menunggu' => 'label label-warning',
+        'Sedang Diproses' => 'label label-info',
+        'Selesai' => 'label label-success',
+        'Tidak Valid' => 'label label-danger'
+    );
+
+    return $arrStatus[$status];
+}
+
+
 function breadCrumbs($menu_id) {
 
     $ci =& get_instance();

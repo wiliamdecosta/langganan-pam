@@ -18,7 +18,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    Selamat Datang di Aplikasi Informasi & Aduan Pelanggan PDAM Tirtawening
+                    Selamat Datang di Aplikasi Informasi Tagihan & Aduan Pelanggan PDAM Tirtawening
                 </div>
             </div>
         </div>

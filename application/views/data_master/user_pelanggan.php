@@ -46,6 +46,7 @@
 
 <script>
     $( "#i_search" ).on( "keydown", function(event) {
+      event.stopPropagation();
       if(event.which == 13)
         loadDataTable();
     });

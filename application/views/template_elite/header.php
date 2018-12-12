@@ -34,6 +34,7 @@
     <!--stickey kit -->
     <script src="<?php echo base_url();?>assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <script src="<?php echo base_url();?>assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
+
     <!--Custom JavaScript -->
     <script src="<?php echo base_url();?>assets/js/custom.min.js"></script>
     <?php $this->load->view('template_elite/styles.php'); ?>
@@ -93,7 +94,7 @@
                         <!-- User Profile -->
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown u-pro">
-                            <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<?php echo base_url();?>assets/images/users/1.jpg" alt="user" class=""> <span class="hidden-md-down">Welcome, <?php echo $this->session->userdata('user_name'); ?> &nbsp;<i class="fa fa-angle-down"></i></span> </a>
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<?php echo base_url();?>assets/images/users/green.png" alt="user" class=""> <span class="hidden-md-down">Welcome, <?php echo $this->session->userdata('user_name'); ?> &nbsp;<i class="fa fa-angle-down"></i></span> </a>
                             <div class="dropdown-menu dropdown-menu-right animated flipInY">
                                 <!-- text-->
                                 <a href="<?php echo base_url('auth/profile'); ?>" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
@@ -126,17 +127,18 @@
 
 
                         <?php if($this->session->userdata('group_login') == 'pelanggan'): ?>
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class=" icon-book-open"></i><span class="hide-menu"> Aduan Pelanggan </span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="<?php echo base_url('aduan_pelanggan/tulis_aduan');?>">Tulis Aduan</a></li>
-                                <li><a href="<?php echo base_url('aduan_pelanggan');?>">List Aduan</a></li>
-                            </ul>
-                        </li>
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class=" icon-speedometer"></i><span class="hide-menu"> Info Tagihan </span></a>
+                        <li> <a class="has-arrow waves-effect waves-dark active" href="javascript:void(0)" aria-expanded="false"><i class=" icon-speedometer"></i><span class="hide-menu"> Info Tagihan </span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="<?php echo base_url('info_rekening/cek_tagihan');?>">Cek Info Tagihan</a></li>
                             </ul>
                         </li>
+                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class=" icon-book-open"></i><span class="hide-menu"> Aduan Pelanggan </span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="<?php echo base_url('aduan_pelanggan/tulis_aduan');?>">Tulis Aduan</a></li>
+                                <li><a href="<?php echo base_url('aduan_pelanggan');?>">Daftar Aduan</a></li>
+                            </ul>
+                        </li>
+
                         <?php else: /* Menu Admin Below*/?>
                         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-laptop"></i><span class="hide-menu"> Data Master </span></a>
                             <ul aria-expanded="false" class="collapse">
@@ -147,7 +149,8 @@
                         </li>
                         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class=" icon-book-open"></i><span class="hide-menu"> Aduan Pelanggan </span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="<?php echo base_url('aduan_pelanggan/admin');?>">List Aduan</a></li>
+                                <li><a href="<?php echo base_url('aduan_pelanggan/index_admin');?>">Daftar Aduan</a></li>
+                                <li><a href="<?php echo base_url('aduan_pelanggan/laporan_aduan_per_tgl ');?>">Laporan Per Tanggal</a></li>
                             </ul>
                         </li>
                         <?php endif; ?>

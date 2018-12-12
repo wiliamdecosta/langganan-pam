@@ -17,10 +17,13 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
+
                 <div class="card-body">
+
                     <div class="form-group">
                         <div class="input-group">
-                            <input class="form-control col-md-5 offset-md-7" id="i_search" placeholder="Pencarian..." aria-label="" aria-describedby="basic-addon1" type="text">
+                            <button type="button" onclick="downloadAduan();" class="btn btn-success"><i class="mdi mdi-file-excel"></i> Download Excel</button>
+                            <input class="form-control col-md-5 offset-md-5" id="i_search" placeholder="Pencarian..." aria-label="" aria-describedby="basic-addon1" type="text">
                             <div class="input-group-append">
                                 <button id="btn-search" class="btn btn-info" type="button"><i class="fas fa-search"></i> Search</button>
                             </div>
@@ -29,17 +32,25 @@
                 </div>
 
                 <div class="card-body p-t-0">
+                    <div class="row">
+                        <div class="col-12">
+                            <h3>Lokasi : <?php echo getCurrentLocation(); ?></h3>
+                        </div>
+                    </div>
                     <div class="card b-all shadow-none">
                         <div class="inbox-center table-responsive">
+
                             <table class="table table-hover no-wrap">
                                 <thead>
                                     <tr>
                                         <th>No Laporan</th>
+                                        <th>Pelapor</th>
+                                        <th class="text-center">Tgl Lapor</th>
                                         <th>Lokasi</th>
                                         <th>Subyek Keluhan</th>
                                         <th class="text-center">Status</th>
-                                        <th class="text-center">Tanggal Lapor</th>
-                                        <th>Action</th>
+                                        <th class="text-center">Tgl Update</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody id="aduan-list-content">
@@ -65,7 +76,29 @@
         </div>
     </div>
 
+<script>
 
+function downloadAduan() {
+
+    var url = "<?php echo WS_JQGRID . "aduan.aduan_pelanggan_controller/download_excel_per_lokasi/?"; ?>";
+    url += "<?php echo $this->security->get_csrf_token_name(); ?>=<?php echo $this->security->get_csrf_hash(); ?>";
+
+    Swal({
+        title: 'Konfirmasi',
+        text: "Anda yakin ingin melakukan download data?",
+        type: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#538cf6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya, Yakin'
+        }).then((result) => {
+        if (result.value) {
+            window.location = url;
+        }
+    });
+}
+
+</script>
 
 <script>
     var pager_selector = '#aduan-list-pager';
@@ -112,7 +145,7 @@
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
-                url: '<?php echo WS_JQGRID."aduan.aduan_pelanggan_controller/pelanggan_aduan_list"; ?>',
+                url: '<?php echo WS_JQGRID."aduan.aduan_pelanggan_controller/admin_aduan_list"; ?>',
                 data: params,
                 timeout: 10000,
                 success: function(data) {
@@ -143,10 +176,9 @@
 
 </script>
 
-
 <script>
     function deleteAduan(laporan_id, laporan_no) {
-        var url = "<?php echo WS_JQGRID . "aduan.aduan_pelanggan_controller/delete_aduan/?"; ?>";
+        var url = "<?php echo WS_JQGRID . "aduan.aduan_pelanggan_controller/delete_aduan_admin/?"; ?>";
         url += "<?php echo $this->security->get_csrf_token_name(); ?>=<?php echo $this->security->get_csrf_hash(); ?>";
         url += "&laporan_id="+laporan_id;
 

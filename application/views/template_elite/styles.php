@@ -6,4 +6,5 @@
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/bootgrid/jquery.bootgrid.css"/>
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootgrid.custom.css"/>
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/node_modules/sweetalert/sweetalert.css"/>
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/simplePagination.css"/>
 

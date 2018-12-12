@@ -9,7 +9,18 @@ class Aduan_pelanggan extends CI_Controller
 
     function index() {
         check_login();
+        if( $this->session->userdata('group_login') != 'pelanggan' ) {
+            redirect(base_url().'home');
+        }
         $this->load->view('aduan_pelanggan/index');
+    }
+
+    function index_admin() {
+        check_login();
+        if( $this->session->userdata('group_login') != 'admin' ) {
+            redirect(base_url().'home');
+        }
+        $this->load->view('aduan_pelanggan/index_admin');
     }
 
     function tulis_aduan() {
@@ -17,10 +28,15 @@ class Aduan_pelanggan extends CI_Controller
         $this->load->view('aduan_pelanggan/tulis_aduan');
     }
 
-	 function edit() {
+    function laporan_aduan_per_tgl() {
         check_login();
-        $this->load->view('aduan_pelanggan/edit');
+        if( $this->session->userdata('group_login') != 'admin' ) {
+            redirect(base_url().'home');
+        }
+
+        $this->load->view('aduan_pelanggan/laporan_aduan_per_tgl');
     }
+
 
     function kirim_aduan() {
         check_login();
@@ -39,14 +55,19 @@ class Aduan_pelanggan extends CI_Controller
             'upload_path'   => 'upload/aduan_evidences/',
             'allowed_types' => 'jpg|gif|png',
             'overwrite'     => 1,
+            'max_size' => 1024
         );
 
         $this->load->library('upload', $config);
 
         $images = array();
         $filesCount = count($_FILES['uploadgambars']['name']);
+
         $no = 1;
         for($i = 0; $i < $filesCount; $i++){
+            if(!isset($_FILES['uploadgambars']['name'][$i]) or empty($_FILES['uploadgambars']['name'][$i]))
+                continue;
+
             $_FILES['uploadgambar']['name']     = $_FILES['uploadgambars']['name'][$i];
             $_FILES['uploadgambar']['type']     = $_FILES['uploadgambars']['type'][$i];
             $_FILES['uploadgambar']['tmp_name'] = $_FILES['uploadgambars']['tmp_name'][$i];
@@ -62,6 +83,9 @@ class Aduan_pelanggan extends CI_Controller
             $this->upload->initialize($config);
             if($this->upload->do_upload('uploadgambar')){
 
+            }else {
+                $this->session->set_flashdata('error_message', $this->upload->display_errors());
+                redirect(base_url().'aduan_pelanggan/tulis_aduan');
             }
             $no++;
         }
@@ -97,7 +121,119 @@ class Aduan_pelanggan extends CI_Controller
         }catch (Exception $e) {
 
         }
+    }
 
+    function detil($laporan_no) {
+        check_login();
+        if( $this->session->userdata('group_login') != 'pelanggan' ) {
+            redirect(base_url().'aduan_pelanggan');
+        }
+
+        $this->load->model('aduan/laporan_pelanggan');
+        $table = $this->laporan_pelanggan;
+
+        $item = $table->getItemByNoLaporan($laporan_no);
+        $item['lampiran'] = array();
+        if(!empty($item['upload_gambar1'])) {
+            $item['lampiran'][] = $item['upload_gambar1'];
+        }
+        if(!empty($item['upload_gambar2'])) {
+            $item['lampiran'][] = $item['upload_gambar2'];
+        }
+        if(!empty($item['upload_gambar3'])) {
+            $item['lampiran'][] = $item['upload_gambar3'];
+        }
+
+        $table->updateStatusReadUser('R',$laporan_no);
+        $this->load->view('aduan_pelanggan/detil', $item);
+    }
+
+    function detil_admin($laporan_no) {
+        check_login();
+        if( $this->session->userdata('group_login') != 'admin' ) {
+            redirect(base_url().'aduan_pelanggan/index_admin');
+        }
+
+        $this->load->model('aduan/laporan_pelanggan');
+        $table = $this->laporan_pelanggan;
+
+        $item = $table->getItemByNoLaporan($laporan_no);
+        $item['lampiran'] = array();
+        if(!empty($item['upload_gambar1'])) {
+            $item['lampiran'][] = $item['upload_gambar1'];
+        }
+        if(!empty($item['upload_gambar2'])) {
+            $item['lampiran'][] = $item['upload_gambar2'];
+        }
+        if(!empty($item['upload_gambar3'])) {
+            $item['lampiran'][] = $item['upload_gambar3'];
+        }
+
+        $table->updateStatusReadAdmin('R',$laporan_no);
+        $this->load->view('aduan_pelanggan/detil_admin', $item);
+    }
+
+
+
+    function update_aduan_admin() {
+        check_login();
+
+        $status_laporan = getVarClean('status_laporan','str','');
+        $laporan_no = getVarClean('laporan_no','str','');
+        $current_status = getVarClean('current_status','str','');
+
+        $config = array(
+            'upload_path'   => 'upload/file_pekerjaan/',
+            'allowed_types' => 'jpg|gif|png|xls|xlsx|doc|docx',
+            'overwrite'     => 1,
+            'max_size' => 3072
+        );
+
+        $this->load->library('upload', $config);
+
+        $fileName = '';
+
+        if(isset($_FILES['file_pekerjaan']['name']) and !empty($_FILES['file_pekerjaan']['name'])) {
+            $file_ext = pathinfo($_FILES['file_pekerjaan']['name'],PATHINFO_EXTENSION);
+            $fileName = "lap_".$laporan_no.".".$file_ext;
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            if($this->upload->do_upload('file_pekerjaan')){
+
+            }else {
+                $this->session->set_flashdata('error_message', $this->upload->display_errors());
+                redirect(base_url().'aduan_pelanggan/detil_admin/'.$laporan_no);
+            }
+        }
+
+        try{
+
+
+            $record = array(
+                'status_laporan' => $status_laporan
+            );
+            if(!empty($fileName)) {
+                $record['upload_file_pekerjaan'] = $fileName;
+            }
+
+            $this->load->model('aduan/laporan_pelanggan');
+            $table = $this->laporan_pelanggan;
+            $table->actionType = 'UPDATE';
+
+            if($current_status != $status_laporan) {
+                $table->db->set('status_read_user',"'U'",false);
+            }
+
+            $table->db->set('updated_date',"current_timestamp",false);
+            $table->db->set('updated_by',"'".$this->session->userdata('user_email')."'",false);
+            $table->db->where('laporan_no', $laporan_no);
+            $table->db->update('laporan_pelanggan', $record);
+
+            redirect(base_url().'aduan_pelanggan/detil_admin/'.$laporan_no);
+
+        }catch (Exception $e) {
+
+        }
     }
 
 

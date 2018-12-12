@@ -47,13 +47,13 @@
 										<div class="col-md-12">
 											<div class="form-group">
 												<label class="control-label"><strong>Alamat Lengkap</strong> </label>
-												<input id="lokasi" class="form-control" name="alamat_aduan" required="" placeholder="Alamat keluhan" type="text">
+												<input id="lokasi" class="form-control" name="alamat_aduan" required="" placeholder="Alamat aduan" type="text">
 											</div>
 										</div>
 									</div>
                                     <div class="form-group">
                                         <label class="control-label"><strong>Keluhan : </strong></label>
-                                        <input id="lokasi" class="form-control" name="subyek_aduan" required="" placeholder="Tuliskan subyek aduan.." type="text">
+                                        <input id="lokasi" class="form-control" name="subyek_aduan" required="" placeholder="Tuliskan subyek aduan" type="text">
                                     </div>
                                 </div>
                             </div>
@@ -70,15 +70,15 @@
 							<div class="row">
                                 <div class="col-md-10">
                                     <div class="form-group">
-                                        <label class="control-label"><strong>Upload Foto 1 : </strong></label>
+                                        <label class="control-label"><strong>Upload Foto 1 (Max.1MB) : </strong></label>
                                         <input class="form-control" type="file" name="uploadgambars[]">
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label"><strong>Upload Foto 2 : </strong></label>
+                                        <label class="control-label"><strong>Upload Foto 2 (Max.1MB) : </strong></label>
                                         <input class="form-control" type="file" name="uploadgambars[]">
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label"><strong>Upload Foto 3 : </strong></label>
+                                        <label class="control-label"><strong>Upload Foto 3 (Max.1MB) : </strong></label>
                                         <input class="form-control" type="file" name="uploadgambars[]">
                                     </div>
                                 </div>
@@ -95,5 +95,15 @@
             </div>
         </div>
     </div>
+
+    <?php if($this->session->flashdata('error_message') != ""): ?>
+    <script>
+        Swal(
+            'Error',
+            <?php echo "'".$this->session->flashdata('error_message')."'"; ?>,
+            'warning'
+        )
+    </script>
+    <?php endif; ?>
 
 <?php $this->load->view('template_elite/footer.php');?>

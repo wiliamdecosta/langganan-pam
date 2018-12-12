@@ -54,3 +54,11 @@
 .jqx-fill-state-normal {
     border: 1px solid #aaa;
 }
+
+.unread {
+    font-weight: bold !important;
+}
+
+.read {
+    font-weight: normal !important;
+}

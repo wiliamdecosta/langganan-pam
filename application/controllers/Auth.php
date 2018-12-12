@@ -96,6 +96,8 @@ class Auth extends CI_Controller
 
 
         $this->session->set_userdata($userdata);
+        //if($group_login == 'admin') redirect(base_url().'aduan_pelanggan/index_admin');
+        //else redirect(base_url().'home');
         redirect(base_url().'home');
     }
 

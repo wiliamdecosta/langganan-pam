@@ -35,11 +35,9 @@ class Lokasi extends Abstract_model {
             // example :
             $this->record[$this->pkey] = $this->generate_seq_id($this->table, $this->pkey);
 
-
         }else {
             //do something
             //example:
-
         }
         return true;
     }
