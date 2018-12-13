@@ -72,19 +72,74 @@ class Chat_laporan_aduan_controller {
         $items = $table->getAll(0, -1, $sidx, $sord);
         $output = '';
 
-        foreach($items as $item) {
-            $output .= '
-                <div class="d-flex no-block comment-row">
-                    <div class="comment-text w-100">
-                        <h5 class="font-medium">From: '.$item['sender'].'</h5>
-                        <p class="m-b-10 text-muted">'.$item['message'].'</p>
-                        <div class="comment-footer">
-                            <span class="text-muted pull-right">'.$item['get_send_time'].'</span>
+        $userdata = $ci->session->userdata;
+        if($userdata['group_login'] == 'pelanggan') {
+
+            foreach($items as $item) {
+
+                if($item['is_sender_admin'] == 'Y') {
+                    $output .= '
+                    <div class="d-flex no-block">
+                        <div class="comment-text w-100">
+                            <h5 class="font-medium">'.$item['sender'].'</h5>
+                            <p class="m-b-10">'.$item['message'].'</p>
+                            <div class="comment-footer">
+                                <span class="text-muted pull-right">'.$item['get_send_time'].'</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <hr>';
+                    <hr>';
+                }else {
+
+                    $output .= '
+                    <div class="d-flex no-block">
+                        <div class="comment-text w-100">
+                            <h5 class="font-medium text-right">'.$item['sender'].'</h5>
+                            <p class="m-b-10 text-right">'.$item['message'].'</p>
+                            <div class="comment-footer text-right">
+                                <span class="text-muted pull-right">'.$item['get_send_time'].'</span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>';
+                }
+            }
+
+        }else {
+
+            foreach($items as $item) {
+
+                if($item['is_sender_user'] == 'Y') {
+                    $output .= '
+                        <div class="d-flex no-block">
+                            <div class="comment-text w-100">
+                                <h5 class="font-medium">'.$item['sender'].'</h5>
+                                <p class="m-b-10">'.$item['message'].'</p>
+                                <div class="comment-footer">
+                                    <span class="text-muted pull-right">'.$item['get_send_time'].'</span>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>';
+                }else {
+
+                    $output .= '
+                        <div class="d-flex no-block">
+                            <div class="comment-text w-100">
+                                <h5 class="font-medium text-right">'.$item['sender'].'</h5>
+                                <p class="m-b-10 text-right">'.$item['message'].'</p>
+                                <div class="comment-footer text-right">
+                                    <span class="text-muted pull-right">'.$item['get_send_time'].'</span>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>';
+                }
+            }
+
         }
+
+
         return $output;
     }
 
