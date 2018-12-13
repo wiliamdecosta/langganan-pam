@@ -57,6 +57,17 @@ function getClassStatus($status) {
     return $arrStatus[$status];
 }
 
+function isChatExist($laporan_no) {
+    $ci =& get_instance();
+    $userdata = $ci->session->userdata;
+
+    $sql = "SELECT COUNT(1) as total FROM chat_laporan_aduan
+                WHERE laporan_no = ?";
+    $query = $ci->db->query($sql, $laporan_no);
+    $row = $query->row_array();
+
+    return $row['total'];
+}
 
 function breadCrumbs($menu_id) {
 

@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-lg-12">
                 <div class="row">
-                    <div class="col-xlg-10 col-lg-9 col-md-8 bg-light border-left">
+                    <div class="col-xlg-10 col-lg-9 col-md-8">
                         <div class="card">
                             <div class="card-body p-t-0">
                                 <div class="card b-all shadow-none">
@@ -108,6 +108,89 @@
                 </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Respon kepada Pelanggan :</h5>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="hidden" id="nomor_laporan" value="<?php echo $this->uri->segment(3);?>">
+                            <input class="form-control col-md-10" id="i_comment" placeholder="Kirim tanggapan Anda (e.g: Terimakasih karena Anda sudah melaporkan keluhan Anda...)" aria-label="" aria-describedby="basic-addon1" type="text">
+                            <div class="input-group-append">
+                                <button id="btn-send" onClick="sendComment();" class="btn btn-info" type="button"><i class="fas fa-envelope"></i> Kirim Pesan </button>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+
+                <!-- ============================================================== -->
+                <!-- Comment widgets -->
+                <!-- ============================================================== -->
+                <div class="comment-widgets" id="comment-box" style="max-height:300px;overflow-y:scroll;">
+                    <!-- Comment Row -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<script>
+    $(function() {
+        reloadComments();
+    });
+
+    function reloadComments() {
+        $.ajax({
+            url: '<?php echo WS_JQGRID."aduan.chat_laporan_aduan_controller/reload_comments"; ?>',
+            dataType: "json",
+            type: "POST",
+            data: {
+                laporan_no : $('#nomor_laporan').val()
+            },
+            success: function (data) {
+                $('#comment-box').html(data.comments);
+            },
+            error: function (xhr, status, error) {
+                swal({title: "Error!", text: xhr.responseText, html: true, type: "error"});
+            }
+        });
+    }
+
+    function sendComment() {
+
+        if($('#i_comment').val() == '') {
+            Swal({
+                title: 'Silahkan mengisi tanggapan Anda',
+                animation: false,
+                customClass: 'animated tada'
+            });
+            return;
+        }
+
+        $.ajax({
+            url: '<?php echo WS_JQGRID."aduan.chat_laporan_aduan_controller/send_comment"; ?>',
+            dataType: "json",
+            type: "POST",
+            data: {
+                laporan_no : $('#nomor_laporan').val(),
+                message: $('#i_comment').val()
+            },
+            success: function (data) {
+                if(data.success) {
+                    $('#comment-box').html(data.comments);
+                    $('#i_comment').val('');
+                }
+
+            },
+            error: function (xhr, status, error) {
+                swal({title: "Error!", text: xhr.responseText, html: true, type: "error"});
+            }
+        });
+    }
+</script>
 
 <?php if($this->session->flashdata('error_message') != ""): ?>
     <script>
