@@ -94,7 +94,7 @@ class Chat_laporan_aduan_controller {
                     $output .= '
                     <div class="d-flex no-block">
                         <div class="comment-text w-100">
-                            <h5 class="font-medium text-right">'.$item['sender'].'</h5>
+                            <h5 class="font-medium text-right"> You </h5>
                             <p class="m-b-10 text-right">'.$item['message'].'</p>
                             <div class="comment-footer text-right">
                                 <span class="text-muted pull-right">'.$item['get_send_time'].'</span>
@@ -126,7 +126,7 @@ class Chat_laporan_aduan_controller {
                     $output .= '
                         <div class="d-flex no-block">
                             <div class="comment-text w-100">
-                                <h5 class="font-medium text-right">'.$item['sender'].'</h5>
+                                <h5 class="font-medium text-right"> You </h5>
                                 <p class="m-b-10 text-right">'.$item['message'].'</p>
                                 <div class="comment-footer text-right">
                                     <span class="text-muted pull-right">'.$item['get_send_time'].'</span>
