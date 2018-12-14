@@ -53,7 +53,8 @@ class Auth extends CI_Controller
         if($group_login == 'pelanggan') {
             $sql = "select user_id, no_pelanggan, nama, alamat, hp, email, password, status_aktif
                     from user_pelanggan
-                    where email = ?";
+                    where email = ?
+                    limit 1";
         }else {
             $sql = "select admin_id as user_id, lokasi_id, admin_nama as nama, admin_email as email, admin_password as password, status_aktif
                     from user_admin

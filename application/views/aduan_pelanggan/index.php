@@ -164,7 +164,6 @@
             }
         });
     }
-
 </script>
 
 <?php if($this->session->flashdata('success_message') != ""): ?>

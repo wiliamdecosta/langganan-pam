@@ -127,7 +127,7 @@
 
 
                         <?php if($this->session->userdata('group_login') == 'pelanggan'): ?>
-                        <li> <a class="has-arrow waves-effect waves-dark active" href="javascript:void(0)" aria-expanded="false"><i class=" icon-speedometer"></i><span class="hide-menu"> Info Tagihan </span></a>
+                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class=" icon-speedometer"></i><span class="hide-menu"> Info Tagihan </span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="<?php echo base_url('info_rekening/cek_tagihan');?>">Cek Info Tagihan</a></li>
                             </ul>

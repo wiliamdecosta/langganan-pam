@@ -27,7 +27,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label"><strong>ID Pelanggan :</strong> </label>
-                                        <input type="text" class="form-control" disabled="" value="<?php echo $this->session->userdata('no_pelanggan'); ?>">
+                                        <input type="text" class="form-control" id="no_pelanggan" readonly="" value="<?php echo $this->session->userdata('no_pelanggan'); ?>">
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label"><strong>Periode :</strong> </label>
@@ -99,7 +99,7 @@
                                             <p class="form-control-static" id="info-total-tagihan"> Rp. 350,000 </p>
                                         </div>
                                     </div>
-									<button class="btn btn-success"><span class="btn-label"><i class="far fa-envelope"></i></span> Kirim Email</button>
+									<button class="btn btn-success" type="button" onclick="sendEmailTagihan();"><span class="btn-label"><i class="far fa-envelope"></i></span> Kirim Email</button>
                                 </div>
                             </div>
 
@@ -120,7 +120,8 @@
                 dataType: "json",
                 type: "POST",
                 data: {
-                    periode : $('#periode').val()
+                    periode : $('#periode').val(),
+                    no_pelanggan : $('#no_pelanggan').val()
                 },
                 success: function (data) {
 
@@ -135,7 +136,7 @@
 
                         $('#info-nopel').html(info_tagihan.nolang);
                         $('#info-nama').html(info_tagihan.nama);
-                        $('#info-periode').html($('#periode option:selected').text());
+                        $('#info-periode').html(info_tagihan.periode_tagihan);
                         $('#info-standmeter').html(info_tagihan.stand_awal + ' - ' + info_tagihan.stan_akhir);
                         $('#info-pemakaian').html(info_tagihan.pemakaian);
                         $('#info-total-tagihan').html('<strong>Rp. '+ $.number(info_tagihan.tagihan, 0)+'</strong>');
@@ -150,6 +151,44 @@
             });
         });
     });
+
+
+    function sendEmailTagihan() {
+
+        Swal({
+            title: 'Konfirmasi',
+            text: "Anda yakin ingin mengirim tagihan ke email ?",
+            type: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#538cf6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Yakin'
+            }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: '<?php echo WS_JQGRID."tagihan.tagihan_controller/send_email_tagihan"; ?>',
+                    dataType: "json",
+                    type: "POST",
+                    data: {
+                        periode : $('#periode').val(),
+                        no_pelanggan : $('#no_pelanggan').val()
+                    },
+                    success: function (data) {
+                        if(data.success) {
+                            swal('Berhasil', data.message,'success');
+                        }else {
+                            swal('Error', data.message,'error');
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        swal({title: "Error!", text: xhr.responseText, html: true, type: "error"});
+                    }
+                });
+            }
+        });
+
+
+    }
 
 </script>
 

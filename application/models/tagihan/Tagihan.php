@@ -47,7 +47,7 @@ class Tagihan extends Abstract_model {
         $bulan = $ex_periode[0];
         $tahun = $ex_periode[1];
 
-        $sql = "SELECT * FROM tagihan WHERE
+        $sql = "SELECT *, (to_char(to_timestamp (bulan, 'MM'), 'Month') || ' ' || tahun) as periode_tagihan  FROM tagihan WHERE
                     bulan = ? and
                     tahun = ? and
                     nolang = ?";
