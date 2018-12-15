@@ -80,6 +80,11 @@ class Tagihan_controller {
                                 <td>'.$info_tagihan['nama'].'</td>
                             </tr>
                             <tr>
+                                <td>Alamat</td>
+                                <td>:</td>
+                                <td>'.$info_tagihan['alamat'].'</td>
+                            </tr>
+                            <tr>
                                 <td>Bulan/Tahun</td>
                                 <td>:</td>
                                 <td>'.$info_tagihan['periode_tagihan'].'</td>

@@ -27,7 +27,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label"><strong>ID Pelanggan :</strong> </label>
-                                        <input type="text" class="form-control" id="no_pelanggan" readonly="" value="<?php echo $this->session->userdata('no_pelanggan'); ?>">
+                                        <input type="text" class="form-control" id="no_pelanggan" value="<?php echo $this->session->userdata('no_pelanggan'); ?>">
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label"><strong>Periode :</strong> </label>
@@ -69,6 +69,12 @@
                                         <label class="control-label text-right col-md-3">Nama :</label>
                                         <div class="col-md-9">
                                             <p class="form-control-static" id="info-nama"> Wiliam Decosta </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-3">Alamat :</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static" id="info-alamat"> Jl.abc </p>
                                         </div>
                                     </div>
 
@@ -136,6 +142,7 @@
 
                         $('#info-nopel').html(info_tagihan.nolang);
                         $('#info-nama').html(info_tagihan.nama);
+                        $('#info-alamat').html(info_tagihan.alamat);
                         $('#info-periode').html(info_tagihan.periode_tagihan);
                         $('#info-standmeter').html(info_tagihan.stand_awal + ' - ' + info_tagihan.stan_akhir);
                         $('#info-pemakaian').html(info_tagihan.pemakaian);
