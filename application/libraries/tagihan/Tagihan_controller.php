@@ -24,7 +24,8 @@ class Tagihan_controller {
             $periode = getVarClean('periode','str','');
 
             $info_tagihan = $table->getInfoTagihan($no_pelanggan, $periode);
-            if(count($info_tagihan) == 0) {
+			
+            if($info_tagihan == null) {
                 $data['rows'] = null;
             }else {
                 $data['rows'] = $info_tagihan;
