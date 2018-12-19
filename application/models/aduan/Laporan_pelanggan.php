@@ -65,8 +65,8 @@ class Laporan_pelanggan extends Abstract_model {
             // example :
             $this->db->set('laporan_tgl',"current_timestamp",false);
 
-            $this->db->set('status_read_user',"U",false);
-            $this->db->set('status_read_admin',"U",false);
+            $this->db->set('status_read_user',"'U'",false);
+            $this->db->set('status_read_admin',"'U'",false);
 
             $this->db->set('creation_date',"current_timestamp",false);
             $this->record['created_by'] = $userdata['user_name'];
