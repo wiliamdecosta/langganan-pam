@@ -87,6 +87,31 @@ class User_pelanggan extends Abstract_model {
         }
         return false;
     }
+
+    function cekNolang($nolang)
+    {
+        $this->db->select('*');
+        $this->db->from($this->table);
+        $this->db->where(['no_pelanggan' => $nolang]);
+        $q = $this->db->get();
+        if ($q->num_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    function checkValidNolang($nolang)
+    {
+        $this->db->select('*');
+        $this->db->from('tagihan');
+        $this->db->where(['nolang' => $nolang]);
+        $q = $this->db->get();
+        if ($q->num_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 
 /* End of file Users.php */

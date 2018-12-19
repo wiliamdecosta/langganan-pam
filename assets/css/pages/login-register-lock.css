@@ -32,8 +32,10 @@ Login register and recover password Page
   background-position: center center;
   height: 100%;
   width: 100%;
-  padding: 10% 0;
-  position: fixed; }
+  padding: 7% 0;
+  position: absolute; }
+
+
 
 .login-box {
   width: 400px;
@@ -46,8 +48,6 @@ Login register and recover password Page
     display: block;
     margin-bottom: 30px; }
 
-#recoverform {
-  display: none; }
 
 .login-sidebar {
   padding: 0px;
@@ -56,3 +56,9 @@ Login register and recover password Page
     right: 0px;
     position: absolute;
     height: 100%; }
+
+.required input:after {
+  color: #e32;
+  content: ' *';
+  display:inline;
+}
