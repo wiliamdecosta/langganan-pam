@@ -39,7 +39,7 @@
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
-    <section id="wrapper" class="login-register login-sidebar" style="background-image:url();">
+    <section id="wrapper" class="login-register login-sidebar" style="background-image:url(<?php echo base_url('assets/images/air.png'); ?>);">
         <div class="login-box card">
             <div class="card-body">
                 <form class="form-horizontal form-material text-center" method="post" id="loginform" action="<?php echo base_url('auth/login');?>">
