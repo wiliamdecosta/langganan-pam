@@ -967,7 +967,7 @@ class Auth extends CI_Controller
                 'email' => $email,
                 'password' => md5($password),
                 'password_visible' => $password,
-                'status_aktif' => 0,
+                'status_aktif' => 1,
             );
         }
         if ($this->form_validation->run())
