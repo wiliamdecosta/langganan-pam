@@ -42,7 +42,7 @@ class Laporan_pelanggan extends Abstract_model {
                             );
 
     public $selectClause    = "lap.*, lok.lokasi_nama, to_char(laporan_tgl, 'dd Monthyyyy HH24:MI:SS') as tgl_laporan, to_char(updated_date, 'dd Monthyyyy HH24:MI:SS') as tgl_update,
-                                        usr.nama, usr.email, usr.hp";
+                                        usr.nama, usr.email, usr.hp, usr.no_pelanggan";
     public $fromClause      = "laporan_pelanggan lap
                                         inner join lokasi lok on lap.lokasi_id = lok.lokasi_id
                                         inner join user_pelanggan usr on lap.user_id = usr.user_id";

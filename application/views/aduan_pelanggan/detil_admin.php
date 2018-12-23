@@ -34,7 +34,7 @@
                                                 <a href="javascript:void(0)"><img src="<?php echo base_url();?>assets/images/users/green.png" alt="user" width="40" class="img-circle"></a>
                                             </div>
                                             <div class="p-l-10">
-                                                <h4 class="m-b-0"><?php echo $nama; ?></h4>
+                                                <h4 class="m-b-0"><?php echo $nama.' ('.$no_pelanggan.')'; ?></h4>
                                                 <small class="text-muted">dari: <?php echo $email; ?></small>
                                             </div>
                                         </div>

@@ -71,12 +71,13 @@ class Aduan_pelanggan_controller {
     function admin_aduan_list() {
 
         $ci =& get_instance();
-        $userinfo = $ci->session->userdata;
+        //$userinfo = $ci->session->userdata;
         $ci->load->model('aduan/laporan_pelanggan');
         $table = $ci->laporan_pelanggan;
 
         $page = intval($ci->input->post('page')) ;
         $limit = $ci->input->post('limit');
+        $lokasi_id = $ci->input->post('lokasi_id');
         $sort = 'updated_date';
         $dir = 'desc';
 
@@ -94,7 +95,9 @@ class Aduan_pelanggan_controller {
         );
         $req_param['where'] = array();
 
-        $req_param['where'][] = "lap.lokasi_id = ".$userinfo['lokasi_id'];
+        if($lokasi_id != 999)
+            $req_param['where'][] = "lap.lokasi_id = ".$lokasi_id;
+
         if(!empty($searchPhrase)) {
              $req_param['where'][] = "(upper(subyek_aduan) LIKE upper('%".$searchPhrase."%'))";
         }
@@ -175,7 +178,7 @@ class Aduan_pelanggan_controller {
 
             $result .= '<tr class="'.$status_read.'">';
             $result .= '<td><a class="btn btn-xs btn-primary" href="'.site_url('aduan_pelanggan/detil_admin/'.$item['laporan_no']).'">'.$item['laporan_no'].'</a></td>';
-            $result .= '<td class="hidden-xs-down">'.$item['nama'].' / '.$item['email'].'<br> (HP : '.$item['hp'].')</td>';
+            $result .= '<td class="hidden-xs-down">'.$item['nama'].' / '.$item['email'].'<br> (HP : '.$item['hp'].') | '.$item['no_pelanggan'].'</td>';
             $result .= '<td class="text-center">'.$item['tgl_laporan'].'</td>';
             $result .= '<td class="hidden-xs-down">'.$item['lokasi_nama'].'</td>';
             $result .= '<td class="max-texts">'.$item['subyek_aduan'].'</td>';
@@ -202,21 +205,29 @@ class Aduan_pelanggan_controller {
             $tLokasi = $ci->lokasi;
             $itemLokasi = $tLokasi->get($lokasi_id);
 
+            if($lokasi_id != 999)
             $table->setCriteria('lap.lokasi_id = '.$lokasi_id);
             $count = $table->countAll();
             $items = $table->getAll(0, -1);
 
-            startExcel("lap_".strtolower(str_replace(' ','_',$itemLokasi['lokasi_nama'])).".xls");
+            $lokasi = $itemLokasi['lokasi_nama'];
+            if($lokasi_id == 999) {
+                $lokasi = 'Semua Lokasi';
+            }
 
-            $output = '<h2>Laporan Aduan Lokasi '.$itemLokasi['lokasi_nama'].'</h2>';
+            startExcel("lap_".strtolower(str_replace(' ','_',$lokasi)).".xls");
+
+            $output = '<h2>Laporan Aduan Lokasi : '.$lokasi.'</h2>';
             $output .='<table  border="1">';
             $output.='<tr>';
             $output.='    <th>No</th>
                              <th>No Laporan</th>
                              <th>Tgl Laporan</th>
                              <th>Pelapor</th>
+                             <th>No Pelanggan</th>
                              <th>Subyek Aduan</th>
                              <th>Alamat Aduan</th>
+                             <th>Lokasi Aduan</th>
                              <th>Status</th>
                              <th>Isi Aduan</th>
                              <th>Updated Date</th>
@@ -236,8 +247,10 @@ class Aduan_pelanggan_controller {
                     $output .= '<td>&nbsp;'.$item['laporan_no'].'</td>';
                     $output .= '<td>&nbsp;'.$item['tgl_laporan'].'</td>';
                     $output .= '<td>'.$item['nama'].' / '.$item['email'].' ('.$item['hp'].')</td>';
+                    $output .= '<td>&nbsp;'.$item['no_pelanggan'].'</td>';
                     $output .= '<td>'.$item['subyek_aduan'].'</td>';
                     $output .= '<td>'.$item['alamat_aduan'].'</td>';
+                    $output .= '<td>'.$item['lokasi_nama'].'</td>';
                     $output .= '<td>'.$item['status_laporan'].'</td>';
                     $output .= '<td>'.$item['isi_aduan'].'</td>';
                     $output .= '<td>&nbsp;'.$item['tgl_update'].'</td>';

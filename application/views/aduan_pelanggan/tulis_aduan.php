@@ -32,7 +32,7 @@
                                         <label class="control-label"><strong>Lokasi :</strong> </label>
 										<select required="" class="form-control" name="lokasi_id">
                                             <?php
-                                                $sql = "SELECT * FROM lokasi";
+                                                $sql = "SELECT * FROM lokasi WHERE lokasi_id != 999";
                                                 $query = $this->db->query($sql);
                                                 $rows = $query->result_array();
 

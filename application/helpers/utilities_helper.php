@@ -29,6 +29,23 @@ function getCurrentLocation() {
     $ci =& get_instance();
     $userdata = $ci->session->userdata;
 
+    if($userdata['lokasi_id'] == 999) {
+        $sql = "SELECT * FROM lokasi
+                where lokasi_id != 999";
+        $query = $ci->db->query($sql);
+        $result = $query->result_array();
+
+        $opt = '';
+        foreach($result as $item) {
+            $opt .= '<option value="'.$item['lokasi_id'].'">'.$item['lokasi_nama'].'</option>';
+        }
+
+        return '<select class="form-inline form-control col-4" id="opt_lokasi_id">
+                <option value="999">Semua Lokasi</option>
+                '.$opt.'
+            </select>';
+    }
+
     $sql = "SELECT lokasi_nama FROM lokasi
                 where lokasi_id = ?";
     $query = $ci->db->query($sql, $userdata['lokasi_id']);

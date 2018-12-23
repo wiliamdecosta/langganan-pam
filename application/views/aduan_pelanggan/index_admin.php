@@ -139,8 +139,17 @@ function downloadAduan() {
                 window.location.replace("#");
             }
 
+            var lokasi_id = <?php echo $this->session->userdata('lokasi_id'); ?>;
+            var opt_lokasi_id = $('#opt_lokasi_id').val();
+
+            if(opt_lokasi_id != null &&
+                opt_lokasi_id != 'undefined'){
+                lokasi_id = opt_lokasi_id;
+            }
+
             params.limit = pager_items_on_page;
             params.searchPhrase = $('#i_search').val();
+            params.lokasi_id = lokasi_id;
 
             $.ajax({
                 type: 'POST',
@@ -169,6 +178,10 @@ function downloadAduan() {
         });
 
         $("#btn-search").on( "click", function(event) {
+            openAduanList(1);
+        });
+
+        $('#opt_lokasi_id').on('change', function(){
             openAduanList(1);
         });
 
