@@ -16,13 +16,14 @@ class User_pelanggan extends Abstract_model {
 
                                 'nama'         => array('nullable' => false, 'type' => 'str', 'unique' => false, 'display' => 'Nama'),
                                 'alamat'         => array('nullable' => true, 'type' => 'str', 'unique' => false, 'display' => 'Alamat'),
+                                'hp'        => array('nullable' => false, 'type' => 'str', 'unique' => false, 'display' => 'HP'),
                                 'email'        => array('nullable' => false, 'type' => 'str', 'unique' => true, 'display' => 'Email'),
                                 'password'     => array('nullable' => true, 'type' => 'str', 'unique' => false, 'display' => 'Password'),
                                 'password_visible'     => array('nullable' => true, 'type' => 'str', 'unique' => false, 'display' => 'Password Visible'),
                                 'status_aktif'       => array('nullable' => true, 'type' => 'int', 'unique' => false, 'display' => 'Status Aktif')
                             );
 
-    public $selectClause    = "usr.user_id, usr.no_pelanggan, usr.nama, usr.alamat, usr.email, usr.password,
+    public $selectClause    = "usr.user_id, usr.no_pelanggan, usr.nama, usr.alamat, usr.email, usr.password, usr.hp,
                                     usr.password_visible,
                                         (CASE
                                             WHEN usr.status_aktif = '1' THEN 'Aktif'
