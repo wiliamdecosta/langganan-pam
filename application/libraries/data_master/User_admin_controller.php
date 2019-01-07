@@ -296,6 +296,7 @@ class User_admin_controller {
             $items = $table->getAll(0,-1);
             echo '<select>';
             foreach($items  as $item ){
+                if($item['lokasi_id'] == 1) continue;
                 echo '<option value="'.$item['lokasi_id'].'">'.$item['lokasi_nama'].'</option>';
             }
             echo '</select>';

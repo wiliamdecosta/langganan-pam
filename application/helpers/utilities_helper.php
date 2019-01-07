@@ -31,7 +31,7 @@ function getCurrentLocation() {
 
     if($userdata['lokasi_id'] == 999) {
         $sql = "SELECT * FROM lokasi
-                where lokasi_id != 999";
+                where lokasi_id not IN (999,1)";
         $query = $ci->db->query($sql);
         $result = $query->result_array();
 

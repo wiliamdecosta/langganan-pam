@@ -44,7 +44,7 @@
 										<select required="" class="form-control" id="lokasi_id">
                                             <option value="all">Semua Lokasi</option>
                                             <?php
-                                                $sql = "SELECT * FROM lokasi WHERE lokasi_id != 999";
+                                                $sql = "SELECT * FROM lokasi WHERE lokasi_id not in (999,1)";
                                                 $query = $this->db->query($sql);
                                                 $rows = $query->result_array();
 
